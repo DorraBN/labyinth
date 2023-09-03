@@ -1,0 +1,131 @@
+<html>
+    <HEAD>
+        <link rel="stylesheet" href="style.css"> 
+      <TITLE>jeu de Labyrinthe </TITLE>
+      <SCRIPT language="javascript">
+      positionFin = "19,24"
+      window.status = "Chargement de la page"
+      function départ()
+      {
+      window.status = "Création des murs"
+      créemur()
+      window.status = "Initiation de la case de départ"
+      document.getElementById("0,0").style.backgroundColor = "C80000"
+      document.getElementById("f0,0").color="C80000"
+      document.form.positionX.value = 0
+      document.form.positionY.value = 0
+      window.status = "Initiation de la case de la fin"
+      document.getElementById(positionFin).style.backgroundColor = "0AC814"
+      document.getElementById("f"+positionFin).color = "0AC814"
+      window.status = ""
+      }
+      function move(e)
+      {
+      y = document.form.positionY.value*1
+      x = document.form.positionX.value*1
+      if (e == 50 && check(y+1,x))
+      {
+      afficher(y+1,x)
+      }
+      if (e == 54 && check(y,x+1))
+      {
+      afficher(y,x+1)
+      }
+      if (e == 56 && check(y-1,x))
+      {
+      afficher(y-1,x)
+      }
+      if (e == 52 && check(y,x-1))
+      {
+      afficher(y,x-1)
+      }
+      }
+      function check(Y,X)
+      {
+      if (document.getElementById(Y+","+X)) return true
+      else return false
+      }
+      function afficher(Y,X)
+      {
+      effacer(document.form.positionY.value,document.form.positionX.value)
+      document.getElementById(Y+","+X).style.backgroundColor = "C80000"
+      document.getElementById("f"+Y+","+X).color="C80000"
+      document.form.positionX.value = X
+      document.form.positionY.value = Y
+      vérifier()
+      }
+      function effacer(Y,X)
+      {
+      document.getElementById(Y+","+X).style.backgroundColor = "FFFFFF"
+      document.getElementById("f"+Y+","+X).color = "FFFFFF"
+      }
+      function créemur()
+      {
+      position = new Array("1,1","2,2","0,1","2,1","4,0","4,2","5,2","4,3","2,3","2,4","6,2","6,1","8,1","8,2","8,3","8,4","7,4","6,4","2,6","3,6","4,6","5,6","6,6","7,6","4,5","6,7","8,5","8,6","0,3","0,4","0,5","0,6","0,7","0,8","1,8","2,8","3,8","4,8","6,9","7,9","8,9","8,8","9,8","4,9","4,10","4,11","5,11","6,11","6,0","9,3","10,3","10,4","10,5","10,6","11,6","11,7","11,8","11,9","11,10","10,10","10,11","9,11","8,11","10,0","10,1","11,1","12,1","12,3","12,4","13,4","13,5","14,1","14,2","14,3","14,4","15,2","16,0","16,1","16,2","13,7","13,8","13,9","13,10","13,11","13,12","12,12","14,7","15,7","15,6","16,6","16,5","16,4","18,1","18,2","18,3","18,4","18,5","18,6","19,4","4,13","5,13","6,13","7,13","8,13","9,13","10,13","19,8","18,8","17,8","17,9","16,9","15,9","17,10","18,10","18,11","18,12","18,13","17,13","16,13","16,12","15,12","15,11","13,13","14,14","13,14","10,14","11,14","1,10","2,10","2,11","2,12","2,13","3,13","0,12","0,14","0,15","1,15","11,15","11,16","12,16","13,16","15,16","16,16","16,15","17,15","18,15","19,15","19,17","18,17","18,18","17,18","16,18","15,18","14,18","13,18","12,18","11,18","10,18","9,18","9,17","9,16","8,16","8,15","7,15","6,15","5,15","5,14","2,15","3,15","3,16","3,17","4,17","5,17","6,17","6,18","7,18","3,19","4,19","4,20","5,20","6,20","7,20","8,20","9,20","10,20","11,20","12,20","10,21","10,22","11,22","12,22","13,22","14,22","14,21","14,20","15,20","16,20","17,20","18,20","17,21","17,22","18,22","19,22","15,22","1,17","1,18","1,19","1,20","1,21","1,23","0,23","2,21","2,22","2,23","3,22","5,22","5,23","5,24","7,21","7,22","7,23","9,22","10,24","12,23","14,24","16,24","15,22","18,23")
+      pos = position
+      for (i=0;i<position.length;i++)
+      {
+      pos[i] = pos[i].split(",")
+      if (check(pos[i][0],pos[i][1]))
+      {
+      document.getElementById(position[i]).style.backgroundColor = "000000"
+      document.getElementById("f"+position[i]).color = "000000"
+      document.getElementById(position[i]).id = ""
+      }
+      }
+      }
+      function vérifier()
+      {
+      if (document.form.positionY.value+","+document.form.positionX.value == positionFin)
+      {
+      alert("Vous avez gagné !")
+      }
+      }
+      </SCRIPT>
+      </HEAD>
+    <h1 >jeu de labyrinthe</h1>
+    <h2>niveau facile</h2>
+      <BODY onload="départ()" onkeypress="move(event.keyCode)">
+      <FORM name="form">
+      <INPUT type="hidden" name="hauteur">
+      <INPUT type="hidden" name="largeur">
+      <INPUT type="hidden" name="positionX">
+      <INPUT type="hidden" name="positionY">
+      </FORM>
+      <SCRIPT>
+      window.status = "Chargement du labyrinthe"
+      hauteur = 20
+      largeur = 25
+      backgcolor = "green"
+      code ="<TABLE border='0'><TR>"
+      for (i=0;i<largeur+2;i++)
+      {
+      code+="<TD bgcolor='000000'></TD>"
+      }
+      code+="</TR>"
+      for (i=0;i<hauteur;i++)
+      {
+      code +="<TR><TD bgcolor='000000'></TD>"
+      for (x=0;x<largeur;x++)
+      {
+      code += "<TD id='"+i+","+x+"' bgcolor='"+backgcolor+"'><FONT color='"+backgcolor+"' id='f"+i+","+x+"'>---</FONT></TD>"
+      }
+      code+="<TD bgcolor='000000'></TD></TR>"
+      }
+      code+="<TR>"
+      for (i=0;i<largeur+2;i++)
+      {
+      code+="<TD bgcolor='000000'></TD>"
+      }
+      code+="</TR>"
+      code+="</TABLE>"
+      document.write(code)
+      document.form.hauteur.value = hauteur
+      document.form.largeur.value = largeur
+      </SCRIPT>
+      <FORM>           <INPUT type="button" value="Haut" onclick="move(56)"><BR><INPUT type="button" value="Gauche" onclick="move(52)"><INPUT type="button" value="Droite" onclick="move(54)"><BR>            <INPUT type="button" value="Bas" onclick="move(50)"></FORM>
+      Vous devez vous rendre à la case verte.
+       
+      </BODY>
+      <footer>crée par dorra ben nsira</footer>
+      </html>

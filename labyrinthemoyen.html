@@ -1,0 +1,72 @@
+<html>
+  <HEAD>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+
+    <div id="maze_container"><!-- --></div>
+    
+    <script src="/mazing.js"></script>
+    <script>
+    
+      let Maze = new MazeBuilder(16, 12);
+      Maze.placeKey();
+      Maze.display("maze_container");
+    
+    </script>
+  </HEAD>
+  <h1 >jeu de labyrinthe</h1>
+  <h2>niveau moyen</h2>
+  <SCRIPT language="javascript"></SCRIPT>
+  <h3>chronométre</h3>
+    <time><br>votre temps est:
+           <br> 00:20:55</time><br>
+    <button id="strt">start</button>
+    <button id="stp">stop</button>
+    <button id="rst">reset</button>
+    <script>var h1 = document.getElementsByTagName('h1')[0];
+      var start = document.getElementById('strt');
+      var stop = document.getElementById('stp');
+      var reset = document.getElementById('rst');
+      var sec = 55;
+      var min = 20;
+      var hrs = 0;
+      var t;
+      
+      function tick(){
+          sec--;
+          if (sec <=0) {
+              sec = 59;
+              min--;
+              
+              }
+          }
+          function add() {
+              tick();
+              h1.textContent = (hrs > 9 ? hrs : "0" + hrs) 
+                       + ":" + (min > 9 ? min : "0" + min)
+                          + ":" + (sec > 9 ? sec : "0" + sec);
+              timer();
+          }
+          function timer() {
+              t = setTimeout(add, 1000);
+          }
+          
+          timer();
+          start.onclick = timer;
+          stop.onclick = function() {
+              clearTimeout(t);
+          }
+          reset.onclick = function() {
+              h1.textContent = "00:20:55";
+              seconds = 55; minutes = 20; hours = 00;
+          }</script>
+   <form>
+     <INPUT type="button" value="Haut" onclick="move(56)"><BR><INPUT type="button" value="Gauche" onclick="move(52)"><INPUT type="button" value="Droite" onclick="move(54)"><BR>            <INPUT type="button" value="Bas" onclick="move(50)"></FORM>
+    Vous devez vous rendre à la case bleue.
+    </BODY>
+    <h1>Score</h1>
+    <!-- Zone de score -->
+    <div id="score">
+        Score du joueur : <span id="scoreValue">0</span>
+      </div>
+    <footer>crée par dorra ben nsira</footer>
+    </html>
